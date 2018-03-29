@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <meta name="theme-color" content="#000000">
+    <title>{{title}}</title>
+    <link href='{% static "css/bootstrap.min.css" %}' rel='stylesheet'></link>
+    <link href='{% static "css/style.css" %}' rel='stylesheet'></link>
+    <style>
+    html{
+      font-family: sans-serif;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    }
+    body{
+      font-family: -apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    }
+    h1{
+    font-size: 1.5rem;
+    border-bottom: 1px solid #dbdbd0;
+    text-align: center;
+    padding-top: 18px;
+    padding-bottom: 18px;
+
+    width: 100%;
+    background: #fff;
+    z-index: 10;
+    margin-left: -15px;
+    }
+
+    @media (min-width: 992px){
+h1 {
+    position: relative;
+    margin-left: 0;
+    font-size: 6.25rem;
+    height: auto;
+    text-align: left;
+    padding-top: 0;
+}
+}
+
+      h1, h2, h3 {
+        font-family: Vinter Web, Georgia, serif;
+      }
+
+      .btn-secondary{
+        margin-top: 15px;
+        font-family: Atlas Grotesk Web,Arial,sans-serif;
+        font-weight: 500;
+        color: #000;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        border-radius: 23px;
+        text-transform: uppercase;
+        font-size: .875rem;
+        -ms-flex-align: center;
+        align-items: center;
+        }
+
+
+      .AtlasGrotesk-Medium-Web,.AtlasGrotesk-MediumItalic-Web{
+        font-family:Atlas Grotesk Web;
+        font-weight:500;
+        font-stretch:normal
+      }
+
+      .AtlasGrotesk-MediumItalic-Web{
+        font-style:italic
+      }
+
+      .AtlasGrotesk-RegularItalic-Web{
+        font-style:italic
+      }
+
+      .AtlasGrotesk-Medium-Web{
+        font-style:normal
+      }
+
+      .AtlasGrotesk-Regular-Web,.AtlasGrotesk-RegularItalic-Web{
+        font-family:Atlas Grotesk Web;
+        font-weight:400;
+        font-stretch:normal
+      }
+
+      .AtlasGrotesk-Regular-Web,.BehrensAntiqua{
+        font-style:normal
+      }
+      .BehrensAntiqua{
+        font-family:Behrens antiqua;
+        font-weight:400
+      }
+    </style>
+  </head>
+  <body>{% block body %}{% endblock %}</body>
+</html>
