@@ -1,0 +1,76 @@
+{% extends 'miller/index.html'%}
+{% load staticfiles %}
+{% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col" style="background-color: #fff; margin-bottom: 30px;">
+      <h1>Contact us</h1>
+      {% if form.errors %}
+      <p>Please correct the errors below before proceeding.</p>
+      {% endif %}
+    </div>
+  </div>
+  <form role="form" method="POST" action="">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group {% if form.errors.first_name %}has-error{% endif %}">
+          <label for="id_signup_first_name">first name*</label>
+
+          <input type="text" class="form-control" value='{{ form.first_name.value|default_if_none:"" }}' id="id_signup_first_name" autofocus="autofocus" name="first_name" placeholder="" >
+          {% if form.errors.first_name %}
+          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.first_name}}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group {% if form.errors.last_name %}has-error{% endif %}">
+          <label for="id_signup_last_name">last name*</label>
+          <input type="text" class="form-control" value='{{ form.last_name.value|default_if_none:"" }}' id="id_signup_last_name" autofocus="autofocus" name="last_name" placeholder="" >
+          {% if form.errors.last_name %}
+          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.last_name}}
+          {% endif %}
+        </div>
+
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group {% if form.errors.email %}has-error{% endif %}">
+          <label for="id_signup_email">email*</label>
+
+          <input type="text" value='{{ form.email.value|default_if_none:"" }}' class="form-control" id="id_signup_email"  name="email">
+          {% if form.errors.email %}
+            <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.email}}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="form-group {% if form.errors.content %}has-error{% endif %}">
+        <label for="id_signup_content">content*</label>
+        <textarea class="form-control" id="id_signup_content"  name="content">{{ form.content.value|default_if_none:"" }}</textarea>
+        {% if form.errors.content %}
+        <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.content}}
+        {% endif %}
+      </div>
+
+      <div class="form-group {% if form.errors.captcha %}has-error{% endif %}">
+        <label for="id_signup_captcha">Please copy the letters into the box</label>
+        {{form.captcha}}
+
+        {% if form.errors.captcha %}
+        <span class='icon icon-arrow-right-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.captcha}}
+        {% endif %}
+      </div>
+
+    <input type="hidden" value="{{ next }}" name="next" />
+    {% csrf_token %}
+
+
+    <button class="btn btn-secondary" type="submit">
+      <span>send</span>
+    </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
