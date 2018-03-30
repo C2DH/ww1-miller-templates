@@ -1,74 +1,84 @@
 {% extends 'miller/index.html'%}
 {% load staticfiles %}
+{% load miller_extras %}
 {% block body %}
+
 <div class="container">
   <div class="row">
     <div class="col" style="background-color: #fff; margin-bottom: 30px;">
-      <h1>Contact us</h1>
+      <h1>{% lookupmulti locale "contact us" language %}{{language}}</h1>
       {% if form.errors %}
-      <p>Please correct the errors below before proceeding.</p>
+      <p>{% lookupmulti locale "please correct the errors in the contact form" language %}</p>
       {% endif %}
+      {% if email_status == ''}
     </div>
   </div>
   <form role="form" method="POST" action="">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group {% if form.errors.first_name %}has-error{% endif %}">
-          <label for="id_signup_first_name">first name*</label>
+          <label for="id_signup_first_name">{% lookupmulti locale "first name" language %}*</label>
 
           <input type="text" class="form-control" value='{{ form.first_name.value|default_if_none:"" }}' id="id_signup_first_name" autofocus="autofocus" name="first_name" placeholder="" >
           {% if form.errors.first_name %}
-          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.first_name}}
+          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{errors.first_name.code}}
           {% endif %}
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group {% if form.errors.last_name %}has-error{% endif %}">
-          <label for="id_signup_last_name">last name*</label>
+          <label for="id_signup_last_name">{% lookupmulti locale "last name" language %}*</label>
           <input type="text" class="form-control" value='{{ form.last_name.value|default_if_none:"" }}' id="id_signup_last_name" autofocus="autofocus" name="last_name" placeholder="" >
           {% if form.errors.last_name %}
-          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.last_name}}
+          <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{errors.last_name.code}}
           {% endif %}
         </div>
 
       </div>
       <div class="col-sm-6">
-        <div class="form-group {% if form.errors.email %}has-error{% endif %}">
-          <label for="id_signup_email">email*</label>
-
-          <input type="text" value='{{ form.email.value|default_if_none:"" }}' class="form-control" id="id_signup_email"  name="email">
-          {% if form.errors.email %}
-            <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.email}}
+        <div class="form-group {% if form.errors.email_from %}has-error{% endif %}">
+          <label for="id_signup_email_from">{% lookupmulti locale "email" language %}*</label>
+          <input type="text" value='{{ form.email_from.value|default_if_none:"" }}' class="form-control" id="id_signup_email_from"  name="email_from">
+          {% if form.errors.email_from %}
+            <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{errors.email_from}}
           {% endif %}
         </div>
       </div>
     </div>
 
     <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group {% if form.errors.content %}has-error{% endif %}">
+          <label for="id_signup_content">{% lookupmulti locale "email content" language %}*</label>
+          {% if form.errors.content %}
+          <div>{{errors.content.code}}</div>
+          {% endif %}
+          <textarea class="form-control" id="id_signup_content"  name="content">{{ form.content.value|default_if_none:"" }}</textarea>
 
-      <div class="form-group {% if form.errors.content %}has-error{% endif %}">
-        <label for="id_signup_content">content*</label>
-        <textarea class="form-control" id="id_signup_content"  name="content">{{ form.content.value|default_if_none:"" }}</textarea>
-        {% if form.errors.content %}
-        <span class='icon icon-arrow-up-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.content}}
-        {% endif %}
+        </div>
       </div>
+    </div>
 
-      <div class="form-group {% if form.errors.captcha %}has-error{% endif %}">
-        <label for="id_signup_captcha">Please copy the letters into the box</label>
-        {{form.captcha}}
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group {% if form.errors.captcha %}has-error{% endif %}">
+          <label for="id_signup_captcha">{% lookupmulti locale "captcha below" language %}</label>
+          <div>
+          {{form.captcha}}
 
-        {% if form.errors.captcha %}
-        <span class='icon icon-arrow-right-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.captcha}}
-        {% endif %}
+          {% if form.errors.captcha %}
+          <span class='icon icon-arrow-right-circle' style='float: left; margin-right: 5px; line-height: 25px'></span> {{form.errors.captcha}}
+          {% endif %}
+          </div>
+        </div>
+
+        <input type="hidden" value="{{ next }}" name="next" />
+        {% csrf_token %}
       </div>
-
-    <input type="hidden" value="{{ next }}" name="next" />
-    {% csrf_token %}
-
+    </div>
 
     <button class="btn btn-secondary" type="submit">
-      <span>send</span>
+      <span>{% lookupmulti locale "send message" language %}</span>
     </button>
     </div>
   </form>
