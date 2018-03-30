@@ -1,0 +1,36 @@
+{% load miller_extras %}
+{% block subject %}{{site_name}} - contact form {% endblock %}
+{% block plain %}
+Dear {{first_name}},
+
+your message on the contact form of the ww1 website has been successful sent to our staff.
+
+> {{content}}
+
+Best regards,
+
+The Éischte Weltkrich Team
+https://ww1.lu
+
+C2DH - Center for Contemporary and Digital History
+https://c2dh.uni.lu
+
+Université du Luxembourg
+{% endblock %}
+
+{% block html %}
+  <p>Dear {{first_name}},</p>
+
+  <p>your message on the contact form of the ww1 website [ww1.lu](https://ww1.lu)  has been successful sent to our staff.</p>
+
+  <blockquote>{{content}}</blockquote>
+
+  <p>Best regards,</p>
+
+  <footer>
+    <p>The <a href='https://ww1.lu'>Éischte Weltkrich</a> Team<br>
+    <a href='https://c2dh.uni.lu'>C2DH</a> - Center for Contemporary and Digital History
+    </p>
+    <p>Université du Luxembourg</p>
+  </footer>
+{% endblock %}
